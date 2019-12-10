@@ -173,7 +173,7 @@ def promt_tr(*args, **kwargs):
 
     # reset rate limit if the last call was 2 minutes ago
     tick = time()
-    if tick - promt_tr.calls > 120:
+    if tick - promt_tr.call_tick > 120:
         promt_tr.calls = 1
     promt_tr.call_tick = tick
 
@@ -197,6 +197,7 @@ def test_sanity(to_lang):
 
 def test_calls():
     ''' test calls '''
+    _ = promt_tr('test ')
     calls = promt_tr.calls
     _ = promt_tr('test ')
     assert promt_tr.calls == calls + 1

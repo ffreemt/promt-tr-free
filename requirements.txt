@@ -4,4 +4,5 @@ jmespath
 pytest
 # mock
 coloredlogs
+fuzzywuzzy
 ratelimit

@@ -20,6 +20,7 @@ install_requires = [
     'jmespath',
     'pytest',
     'coloredlogs',
+    'fuzzywuzzy',
     'ratelimit',
 ]
 
