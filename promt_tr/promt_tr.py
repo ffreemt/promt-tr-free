@@ -2,9 +2,10 @@
 promt translate for free as in beer
 '''
 
+from typing import Any, Callable, Dict, Tuple
+
 import sys
 import logging
-from typing import Callable, Any, Tuple
 import json
 from time import time
 from random import randint
@@ -68,7 +69,7 @@ def _promt_tr(
         from_lang: str = 'auto',
         to_lang: str = 'zh',
         timeout: Tuple[float, float] = (55, 66),
-) -> str:
+) -> Dict[str, str]:
     ''' promt_tr
 
     text = 'test one two three'
@@ -136,7 +137,9 @@ def _promt_tr(
         resp.raise_for_status()
     except Exception as exc:  # pragma: no cover
         LOGGER.error('%s', exc)
-
+        resp = requests.models.Response()
+        resp._content = f'{{"errorCode": "{exc}"}}'.encode()
+        resp.status_code = 499
     try:
         jdata = resp.json()
     except Exception as exc:  # pragma: no cover
